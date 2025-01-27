@@ -7,8 +7,8 @@ const path = require("path");
 
 var con = mysql.createPool({
     host     : 'db',
-    user     : env.process.NODE_USER,
-    password : env.process.NODE_PASSWORD,
+    user     : process.env.NODE_USER,
+    password : process.env.NODE_PASSWORD,
     database : 'inventory',
     dateStrings : true,
     connectionLimit: 10
