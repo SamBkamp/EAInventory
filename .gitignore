@@ -1,0 +1,4 @@
+letsencrypt/certs/**
+**~
+env
+node/node_modules

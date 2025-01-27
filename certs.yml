@@ -1,0 +1,8 @@
+services:
+
+    certbot:
+        image: certbot/certbot
+        volumes:
+            - ./letsencrypt/chall/:/var/www/html/:rw
+            - ./letsencrypt/certs/:/etc/letsencrypt/:rw
+        command: certonly --webroot -w /var/www/html/ -d inventory.exotic-aqua.com -m s.bonnekamp@exotic-aqua.com -n --agree-tos

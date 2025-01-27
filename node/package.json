@@ -1,0 +1,20 @@
+{
+  "name": "ea-inventory",
+  "version": "1.0.0",
+  "description": "EA's inventory solution",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sam Bonnekamp",
+  "license": "ISC",
+  "dependencies": {
+    "cookie-parser": "^1.4.7",
+    "crypto": "^1.0.1",
+    "express": "^4.21.2",
+    "mysql": "^2.18.1",
+    "mysql2": "^3.12.0",
+    "path": "^0.12.7",
+    "sqlstring": "^2.3.3"
+  }
+}
