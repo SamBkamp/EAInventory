@@ -4,6 +4,5 @@ MYSQL_ROOT_PASSWORD=password
 MYSQL_DATABASE=dbname
 MYSQL_USER=username
 MYSQL_PASSWORD=password
-PMA_HOST=dbname
 NODE_USER=username
 NODE_PASSWORD=password
