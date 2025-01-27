@@ -1,4 +1,7 @@
-letsencrypt/certs/**
+letsencrypt/certs/*
+letsencrypt/chall/*	
+!letsencrypt/certs/.gitkeep
+!letsencrypt/chall/.gitkeep
 **~
 env
 node/node_modules
