@@ -4,29 +4,24 @@ const crypto = require("crypto");
 const mysql = require("mysql2");
 const SqlString = require('sqlstring');
 const path = require("path");
+const db = require("./controllers/db-wrapper.js");
 
-var con = mysql.createPool({
+const dbconf = {
     host     : 'db',
     user     : process.env.NODE_USER,
     password : process.env.NODE_PASSWORD,
     database : 'inventory',
     dateStrings : true,
     connectionLimit: 10
-});
+};
 
+db.connectDB(dbconf);
 
- 
-con.query("SELECT 1+1", (error, results, fields)=>{
-    if(error) throw error;
-
-    console.log("connected to db");
-});
 
 const app = express();
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
-//app.use(express.static(__dirname + '/code'));
 app.use('/styles', express.static(path.join(__dirname, 'code', 'styles')));
 app.use('/scripts', express.static(path.join(__dirname, 'code', 'scripts')));
 
@@ -48,7 +43,7 @@ app.post('/:dash?/get-tanks', async (req, res)=>{
 	return;
     }   
     try{
-	var r = await sendQuery("SELECT `model`, `orders`, `sent` FROM `tanks`");
+	var r = await db.sendQuery("SELECT `model`, `orders`, `sent` FROM `tanks`");
 	res.send(JSON.stringify(r));
 	
     }catch(err){
@@ -65,7 +60,7 @@ app.post('/:dash?/get-orders', async (req, res)=>{
     }
 
     try{
-	var r = await sendQuery("SELECT tanks.model, orders.quantity, orders.date, orders.notes FROM tanks INNER JOIN orders ON tanks.id=orders.model ORDER BY orders.date DESC");
+	var r = await db.sendQuery("SELECT tanks.model, orders.quantity, orders.date, orders.notes FROM tanks INNER JOIN orders ON tanks.id=orders.model ORDER BY orders.date DESC");
 	res.send(JSON.stringify(r));
 	
     }catch(err){
@@ -86,7 +81,7 @@ app.post('/:dash?/get-send', async (req, res)=>{
     }
 
     try{
-	var r = await sendQuery("SELECT tanks.model, sent.quantity, sent.date, sent.notes FROM tanks INNER JOIN sent ON tanks.id=sent.model ORDER BY sent.date DESC");
+	var r = await db.sendQuery("SELECT tanks.model, sent.quantity, sent.date, sent.notes FROM tanks INNER JOIN sent ON tanks.id=sent.model ORDER BY sent.date DESC");
 	res.send(JSON.stringify(r));
 	
     }catch(err){
@@ -108,7 +103,7 @@ app.post('/:dash?/get-products', async (req, res)=>{
     }
 
     try{
-	var r = await sendQuery("SELECT `id`, `model` FROM `tanks`");
+	var r = await db.sendQuery("SELECT `id`, `model` FROM `tanks`");
 	res.send(JSON.stringify(r));
 	
     }catch(err){
@@ -146,7 +141,7 @@ app.post("/:dash?/add-order", async (req, res)=>{
     q = SqlString.format(q, [table, req.body.prod, req.body.qty,  dString, req.body.note]);
 
     try{
-	var r = await sendQuery(q);
+	var r = await db.sendQuery(q);
 	console.log(r);
     }catch(err){	
 	console.error(err);
@@ -156,7 +151,7 @@ app.post("/:dash?/add-order", async (req, res)=>{
     q = SqlString.format(q, [table, table, req.body.qty, req.body.prod]);
 
     try{
-	var r = await sendQuery(q);
+	var r = await db.sendQuery(q);
     }catch(err){
 	console.error(err);
 	return res.send("ERROR: SQL");
@@ -218,11 +213,3 @@ app.listen(81, ()=>{
     console.log("server is running on port 81");
 });
 
-function sendQuery(q){ //promise'd sql query
-    return new Promise((resolve, reject) =>{
-	con.query(q, (error, result, fields)=>{
-	    if(error) return reject(error);
-	    resolve(result);
-	});
-    });
-}
