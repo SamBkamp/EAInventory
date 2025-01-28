@@ -3,6 +3,6 @@ letsencrypt/chall/*
 !letsencrypt/certs/.gitkeep
 !letsencrypt/chall/.gitkeep
 **~
-env
+.env
 node/node_modules
 PAT

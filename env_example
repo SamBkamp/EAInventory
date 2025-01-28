@@ -1,8 +1,0 @@
-#EXAMPLE ENV FILE
-
-MYSQL_ROOT_PASSWORD=password
-MYSQL_DATABASE=dbname
-MYSQL_USER=username
-MYSQL_PASSWORD=password
-NODE_USER=username
-NODE_PASSWORD=password
