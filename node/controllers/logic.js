@@ -124,7 +124,7 @@ var dash = async (req, res)=>{
 	return res.send("auth failure");
 	
     }else{
-	res.sendFile(path.join(process.cwd(), "code", "dash", "index.html"));
+	res.render("dash", {active:"inv"});
     }
 };
 
@@ -133,7 +133,8 @@ var sent = async (req, res)=>{
 	return res.send("auth failure");
 	
     }else{
-	res.sendFile(path.join(process.cwd(), "code", "sent", "index.html"));
+	//res.sendFile(path.join(process.cwd(), "code", "sent", "index.html"));
+	res.render("sent", {active:"sent"});
     }
 };
 
@@ -141,12 +142,13 @@ var orders = async (req, res)=>{
     if(req.cookies.ident == undefined || req.cookies.ident != hashedPw){
 	res.send("auth failure");
     }else{
-	res.sendFile(path.join(process.cwd(), "code", "orders", "index.html"));
+	//res.sendFile(path.join(process.cwd(), "code", "orders", "index.html"));
+	res.render("orders", {active:"orders"});
     }
 };
 
 var root = async (req, res)=>{
-    res.sendFile(path.join(process.cwd(), "code", "index.html"));
+    res.render("index");
 };
 
 var login = async (req, res)=>{
