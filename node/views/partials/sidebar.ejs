@@ -6,6 +6,7 @@
 
 
     <ul class="navbar-nav">
+      <% if (active != "guest") { %>
       <li class="nav-item">
 	<% if(active == "inv") { %>
 	<a class="nav-link active"  href="#">Inventory</a>
@@ -34,6 +35,11 @@
 	<a class="nav-link" href="/fm">Fauna Marin Products</a>
 	<% } %>
       </li>
+      <% } else { %>
+      <li class="nav-item">
+	<a class="nav-link active" href="#">Fauna Marin Products</a>
+      </li>
+      <% } %>
     </ul>
 
   </div>

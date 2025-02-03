@@ -78,11 +78,6 @@ var getProducts = async (req, res)=>{
 };
 
 var getFmProducts = async (req, res)=>{
-    if(req.cookies.ident == undefined || req.cookies.ident != hashedPw){
-	res.send("auth failure");
-
-	return;
-    }
 
     try{
 	var r = await db.sendQuery("SELECT code, name, (cost*markup) AS cost, stock FROM `FM_products`");
@@ -166,8 +161,11 @@ var orders = async (req, res)=>{
 
 var fm = async (req, res)=>{
     if(!req.cookies.ident|| req.cookies.ident != hashedPw){
-	res.send("auth failure");
+	res.render("fm", {active: "guest"});
+	console.log("FM");
+	//Guests
     }
+    
     res.render("fm", {active: "fm"});
 }
 
