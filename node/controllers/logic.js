@@ -77,6 +77,23 @@ var getProducts = async (req, res)=>{
     }
 };
 
+var getFmProducts = async (req, res)=>{
+    if(req.cookies.ident == undefined || req.cookies.ident != hashedPw){
+	res.send("auth failure");
+
+	return;
+    }
+
+    try{
+	var r = await db.sendQuery("SELECT code, name, (cost*markup) AS cost, stock FROM `FM_products`");
+	res.send(JSON.stringify(r));
+	
+    }catch(err){
+	res.send("SQL ERROR");
+	console.error(err);
+    }
+};
+
 var addOrder = async (req, res)=>{
     if(!req.cookies.ident|| req.cookies.ident != hashedPw){
 	res.send("auth failure");
@@ -147,6 +164,13 @@ var orders = async (req, res)=>{
     }
 };
 
+var fm = async (req, res)=>{
+    if(!req.cookies.ident|| req.cookies.ident != hashedPw){
+	res.send("auth failure");
+    }
+    res.render("fm", {active: "fm"});
+}
+
 var root = async (req, res)=>{
     res.render("index");
 };
@@ -179,3 +203,5 @@ exports.orders = orders;
 exports.root = root;
 exports.login = login;
 exports.erm = erm;
+exports.fm = fm;
+exports.getFmProducts = getFmProducts;
