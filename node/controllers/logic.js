@@ -80,7 +80,7 @@ var getProducts = async (req, res)=>{
 var getFmProducts = async (req, res)=>{
 
     try{
-	var r = await db.sendQuery("SELECT code, name, (cost*markup) AS cost, stock FROM `FM_products`");
+	var r = await db.sendQuery("SELECT code, name, (cost*markup) AS cost, stock FROM `FM_products` ORDER BY name");
 	res.send(JSON.stringify(r));
 	
     }catch(err){
