@@ -14,6 +14,7 @@ router.get("/sent", logic.sent);
 router.get("/orders/", logic.orders);
 router.get("/", logic.root);
 router.post("/p/login", logic.login);
+router.post("/updateStock", logic.updateFmStock);
 router.get("/fm", logic.fm);
 
 module.exports = router;

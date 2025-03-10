@@ -1,0 +1,47 @@
+<div class="modal fade" id="addProducts" tabindex="-1">
+  <!-- ALERTS -->
+  <div class="alert alert-success alert-dismissible fade w-50 mt-2" style="left: 25vw;"  id="successAlert" role="alert">
+    Product Successfully updated
+    <button type="button" class="btn-close" onclick="hideAlert('#successAlert')" aria-label="Close"></button>
+  </div>
+  <div class="alert alert-danger alert-dismissible fade w-50 mt-2" id="failAlert" role="alert">
+    Problem updated product
+    <button type="button" class="btn-close" onclick="hideAlert('#failAlert')"aria-label="Close"></button>
+  </div>
+  <!-- MODAL -->
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Change Product Stock Level</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+	<div class="row">
+	  <div class="col">
+	    <select class="form-select" id="modalList" aria-label="Item code">	      
+	    </select>
+	  </div>
+	  <div class="col">
+	    <input class="form-control" id="disabledInput" type="text" placeholder="" disabled>
+	  </div>
+	</div>
+	<div class="row mt-5">
+	  <div class="col">
+	    <select class="form-select" id="methodSelect" aria-label="Default select example">
+	      <option value="a" selected>Add</option>
+	      <option value="s">Set to</option>
+	    </select>
+	  </div>
+	  <div class="col">
+	    <input class="form-control" type="number" id="amountInput" placeholder="0">
+	  </div>	  
+	</div>
+	
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+	<button type="button" class="btn btn-primary" onclick="updateStock();">Set</button>
+      </div>
+    </div>
+  </div>
+</div>

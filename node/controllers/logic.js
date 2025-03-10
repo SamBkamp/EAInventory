@@ -184,6 +184,20 @@ var login = async (req, res)=>{
     }
 };
 
+var updateFmStock = async (req, res) => {
+    if(req.cookies.ident == undefined || req.cookies.ident != hashedPw){
+	return res.send({"error":"auth-error"});
+    }
+    req.body.amount = parseInt(req.body.amount);
+    if(!req.body.amount && req.body.amount != 0) return res.send({"error":"data-error"});
+    
+    var stockText = req.body.amount;
+    if(req.body.type == "a") stockText = "stock+"+req.body.amount;        
+    var q = SqlString.format("UPDATE `FM_products` SET stock="+stockText+" WHERE code=?", [req.body.code]);
+    db.sendQuery(q);    
+    res.setHeader('content-type', 'text/JSON');
+    res.send({"success":"done"});
+}
 
 var erm = async (req, res)=>{
     res.send("hello world");
@@ -203,3 +217,4 @@ exports.login = login;
 exports.erm = erm;
 exports.fm = fm;
 exports.getFmProducts = getFmProducts;
+exports.updateFmStock = updateFmStock;

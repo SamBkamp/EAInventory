@@ -5,14 +5,48 @@ $(document).ready(()=>{
 });
 
 
+function hideAlert(target){
+    $(target).removeClass("show");
+}
 
+function updateStock(){
+    var data = {
+	"code": $("#disabledInput").val(),
+	"type": $("#methodSelect").find(":selected").val(),
+	"amount": +$("#amountInput").val() //+ is to implicitly convert text to int
+    };
+
+    $.post("updateStock", data).done(function(data){
+	if(data.success){
+	    getProducts();
+	    $("#successAlert").addClass("show");
+	}else{
+	    $("#failAlert").addClass("show");
+	}
+    });
+}
+
+
+function updateProdName(){
+    var prodSelected = $('#modalList').find(":selected").attr("data-name");
+    $("#disabledInput").val(prodSelected);
+}
+
+
+$("#modalList").on("change", function(){
+    updateProdName();
+});
 
 function getProducts(){
     $.post( "get-fmprod", {})
 	.done(function( data ) {
-	    console.log(data);
+	    $("#tankRows").empty();
+	    $("#modalList").empty();
+	    items = [];
 	    data = JSON.parse(data);
 	    for(key in data){
+
+		//for main list
 		data[key].cost = Number.parseFloat(data[key].cost).toFixed(2);
 		var row = $("<tr><td>"+data[key].code+"</td>\
 <td>"+data[key].name+"</td>\
@@ -22,12 +56,16 @@ function getProducts(){
 		items.push(data[key]);
 		
 		$("#tankRows").append(row);
+
+		//for modal dialogue
+		var opt = $("<option data-name='"+data[key].code+"' value='"+data[key].name+"'>"+data[key].name+"</option>");
+		$("#modalList").append(opt);
 	    }
+	    updateProdName();
 	});
 }
 
 function removeZero(){
-    console.log(rem);
     rem = (rem + 1 )% 2;
     if(rem == 1){
 	$("#oosbtn").addClass("btn-primary");
