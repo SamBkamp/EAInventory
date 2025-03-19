@@ -10,7 +10,7 @@ services:
         working_dir: /home/node/app
         env_file: ".env"
         volumes:
-          - ./node/:/home/node/app/:ro
+          - ./node/:/home/node/app/:rw
         command: "npm start"
         depends_on:
           - db

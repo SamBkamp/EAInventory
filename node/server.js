@@ -1,6 +1,5 @@
 const express = require("express");
-const cookieParser = require("cookie-parser");
-const path = require("path");
+const cookieParser = require("cookie-parser");const path = require("path");
 const db = require("./controllers/db-wrapper.js");
 const router = require("./controllers/router.js");
 

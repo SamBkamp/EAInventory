@@ -2,7 +2,9 @@ const db = require("./db-wrapper.js");
 var SqlString = require('sqlstring');
 const crypto = require("crypto");
 const path = require("path");
+const os = require("os");
 const cookieParser = require("cookie-parser");
+const fs = require('node:fs/promises');
 //this so I don't have to recalculate hash each time TODO: stop??
 var pw = "Jellyfish9@";
 const pwHash = crypto.createHash("sha256");
@@ -185,18 +187,30 @@ var login = async (req, res)=>{
 };
 
 var updateFmStock = async (req, res) => {
+    res.setHeader('content-type', 'text/JSON');
     if(req.cookies.ident == undefined || req.cookies.ident != hashedPw){
 	return res.send({"error":"auth-error"});
     }
     req.body.amount = parseInt(req.body.amount);
     if(!req.body.amount && req.body.amount != 0) return res.send({"error":"data-error"});
-    
+
+    var queryType = "Changed by";    
     var stockText = req.body.amount;
-    if(req.body.type == "a") stockText = "stock+"+req.body.amount;        
+    if(req.body.type == "a") stockText = "stock+"+req.body.amount;
+    else queryType = "Set to";
+    
     var q = SqlString.format("UPDATE `FM_products` SET stock="+stockText+" WHERE code=?", [req.body.code]);
-    db.sendQuery(q);    
-    res.setHeader('content-type', 'text/JSON');
-    res.send({"success":"done"});
+    
+    try{
+	await db.sendQuery(q);
+	var logMsg = `[${new Date(Date.now()).toLocaleString("en-GB")}] ${req.body.code} ${queryType} ${req.body.amount} from ${req.headers['x-forwarded-for']}`;
+	console.log(logMsg);
+	await fs.writeFile(path.join(process.cwd(),"logs", "product-change.log"), logMsg+os.EOL, {flag: 'a'});
+	res.send({"success":"done"});
+    }catch (err){
+	console.error(err);
+	res.send({"error":"DB error"});
+    }
 }
 
 var erm = async (req, res)=>{
