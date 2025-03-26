@@ -144,7 +144,7 @@ var dash = async (req, res)=>{
 
 var sent = async (req, res)=>{
     if(!req.cookies.ident|| req.cookies.ident !== hashedPw){
-	return res.send("auth failure");
+	return res.redirect("/");
 	
     }else{
 	//res.sendFile(path.join(process.cwd(), "code", "sent", "index.html"));
@@ -154,7 +154,7 @@ var sent = async (req, res)=>{
 
 var orders = async (req, res)=>{
     if(req.cookies.ident == undefined || req.cookies.ident != hashedPw){
-	res.send("auth failure");
+	return res.redirect("/");
     }else{
 	//res.sendFile(path.join(process.cwd(), "code", "orders", "index.html"));
 	res.render("orders", {active:"orders"});
