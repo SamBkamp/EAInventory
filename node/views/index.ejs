@@ -8,22 +8,33 @@
     <link href="/styles/indexstyle.css" rel="stylesheet">
   </head>
   <body>
-	<div id="loginBox">
-		<div class="card" style="width: 30em;">
-		     <div class="card-header">
-		     Login to inventory system
-		     </div>
-		       <div class="card-body">
-				 <input type="password" id="pwField" class="form-control" placeholder="Password" aria-label="password" >
-				 
-				 <button onclick="submit()" type="submit" class="btn btn-primary mb-3 mt-3">Submit</button>
-
-				 <p id="pwReply" class="mt-2 text-danger"></p>
-
-	        	</div>
-		</div>
- 		</div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <div class="container-fluid" style="height: 100%;">
+      <div class="row justify-content-center p-0" id="linkRow">
+	<div class="col col-sm-3 d-flex flex-column text-end">	  
+	  <a href="/fm" class="mb-1 mt-auto" style="font-size: 0.8rem;">Go to Fauna Marin inventory >></a>
+	</div>
+      </div>
+      <div class="row justify-content-center" id="loginRow">
+	<div class="col col-sm-3">
+	  <div id="loginBox">
+	    <div class="card" style="width: 100%;">
+	      <div class="card-header">
+		Login to inventory system
+	      </div>
+	      <div class="card-body">
+		<input type="password" id="pwField" class="form-control" placeholder="Password" aria-label="password" >
+		
+		<button onclick="submit()" type="submit" class="btn btn-primary mb-3 mt-3">Submit</button>
+		
+		<p id="pwReply" class="mt-2 text-danger"></p>
+		
+	      </div>
+	    </div>
+	  </div>
+	</div>
+      </div>
+    </div>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src=" https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js "></script>
     <script src="/scripts/indexscript.js"></script>
   </body>

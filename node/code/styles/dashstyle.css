@@ -3,7 +3,20 @@ body{
 }
 
 #mainContent{
-    width: 80%;
+    width: 90%;
     height: 100vh;
     display: flex;
+}
+
+@media screen and (min-width: 992px) {
+    #mainContent{
+	margin-left: 20%;
+    }
+}
+
+
+@media screen and (max-width: 992px) {
+    #mainContent{
+	margin-left: auto;
+    }
 }
