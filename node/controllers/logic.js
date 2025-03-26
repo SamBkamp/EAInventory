@@ -135,7 +135,7 @@ var addOrder = async (req, res)=>{
 
 var dash = async (req, res)=>{
     if(!req.cookies.ident|| req.cookies.ident !== hashedPw){
-	return res.send("auth failure");
+	return res.redirect("/");
 	
     }else{
 	res.render("dash", {active:"inv"});
