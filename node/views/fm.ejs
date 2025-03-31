@@ -18,16 +18,25 @@
 	<div class="col d-lg-flex d-none">
           <h3>Fauna Marin Products </h3>
 	</div>
+	<div class="col col-lg-3 d-flex justify-content-end">
+	  <p class="text-secondary fst-italic mt-auto" style="font-size: 0.9rem;">Last verified at <%= date %> </p>
+	</div>
 	<% if(active != "guest") {%>
+
+	<div class="col col-lg-1 d-flex justify-content-center">
+	  <button id="updateTime" type="button" class="btn btn-secondary w-70 h-100" style="mind-width: 70px;font-size: 0.9rem;">Verify</button>
+	</div>
+	
 	<div class="col col-lg-1 d-flex justify-content-center">
 	  <button id="addBtn" type="button" class="btn btn-success w-50 h-100" style="min-width: 50px;" data-bs-toggle="modal" data-bs-target="#addProducts">&#43;</button>
 	</div>
+	
 	<% } %>
-	<div class="col col-lg-2">
-	     <button id="oosbtn" type="button" class="btn btn-outline-primary float-end h-100 w-100" style="font-size: 100%;" onclick="removeZero()">Filter out of stock</button>
+	<div class="col col-lg-1">
+	     <button id="oosbtn" type="button" class="btn btn-outline-primary float-end h-100 w-100" style="font-size: 0.9rem;" onclick="removeZero()">In stock</button>
       </div>
       </div>
-      <div class="row mt-5">
+      <div class="row mt-3 mt-lg-5">
 	<table class="table">
 	  <thead>
 	    <tr>

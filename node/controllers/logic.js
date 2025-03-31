@@ -162,13 +162,25 @@ var orders = async (req, res)=>{
 };
 
 var fm = async (req, res)=>{
+    var date;
+    try{
+	var q = await db.sendQuery(SqlString.format("SELECT value FROM config WHERE name =?", ["lastupdated"]));
+	date = new Date(parseInt(q[0].value));
+	console.log(date.getTime());
+	date = `${date.getFullYear()}/${date.getMonth()+1}/${date.getDate()} ${date.getHours()}:${date.getMinutes()}HKT`;
+    }catch (err){
+	console.error(err);
+	date = "ERROR";
+    }
+	
+    
+    
     if(!req.cookies.ident|| req.cookies.ident != hashedPw){
-	res.render("fm", {active: "guest"});
-	console.log("FM");
+	res.render("fm", {active: "guest", date: date});
 	//Guests
     }
     
-    res.render("fm", {active: "fm"});
+    res.render("fm", {active: "fm", date:date});
 }
 
 var root = async (req, res)=>{
