@@ -166,8 +166,16 @@ var fm = async (req, res)=>{
     try{
 	var q = await db.sendQuery(SqlString.format("SELECT value FROM config WHERE name =?", ["lastupdated"]));
 	date = new Date(parseInt(q[0].value));
-	console.log(date.getTime());
-	date = `${date.getFullYear()}/${date.getMonth()+1}/${date.getDate()} ${date.getHours()}:${date.getMinutes()}HKT`;
+	var options = {
+	    year: "numeric",
+	    month: "long",
+	    day: "numeric",
+	    hour: "numeric",
+	    minute: "numeric",
+	    hour12: false,
+	    timeZone: "Asia/Hong_Kong"
+	};
+	date = new Intl.DateTimeFormat("en-US", options).format(date);
     }catch (err){
 	console.error(err);
 	date = "ERROR";
@@ -225,6 +233,23 @@ var updateFmStock = async (req, res) => {
     }
 }
 
+var updateVerifiedDate = async(req, res)=>{
+    if(req.cookies.ident == undefined || req.cookies.ident != hashedPw){
+	return res.send({"error":"auth-error"});
+    }
+    try{
+	var d = new Date().getTime();
+	var q = db.sendQuery(SqlString.format("UPDATE `config` SET value=? WHERE name='lastupdated'", [d]));
+	console.log(q);
+	return res.send({"success":d});
+    }
+    catch(err){
+	console.error(err);
+	return res.send({"error":"date couldn't be updated"});
+    }
+};
+    
+
 var erm = async (req, res)=>{
     res.send("hello world");
 };
@@ -244,3 +269,4 @@ exports.erm = erm;
 exports.fm = fm;
 exports.getFmProducts = getFmProducts;
 exports.updateFmStock = updateFmStock;
+exports.updateVerifiedDate = updateVerifiedDate;

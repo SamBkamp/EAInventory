@@ -86,3 +86,23 @@ function removeZero(){
 	}
     }
 }
+
+function verifyTime(){
+
+    var options = {
+	year: "numeric",
+	month: "long",
+	day: "numeric",
+	hour: "numeric",
+	minute: "numeric",
+	hour12: false,
+	timeZone: "Asia/Hong_Kong"
+    };
+    
+    $.post("/update-verified-date", {})
+	.done(function(data){
+	    var date = new Date(parseInt(data.success));
+	    if(data.error) alert(data.error);
+	    else $("#dateText").text("Last verified on " + new Intl.DateTimeFormat("en-US", options).format(date));
+	});
+}
