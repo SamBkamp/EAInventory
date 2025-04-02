@@ -198,6 +198,7 @@ var fm = async (req, res)=>{
 }
 
 var root = async (req, res)=>{
+    if(req.cookies.ident == hashedPw) return res.redirect("/dash");
     res.render("index");
 };
 
