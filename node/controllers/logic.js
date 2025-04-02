@@ -163,8 +163,14 @@ var orders = async (req, res)=>{
 
 var fm = async (req, res)=>{
     var date;
+    var q1, q2, q3;
     try{
 	var q = await db.sendQuery(SqlString.format("SELECT value FROM config WHERE name =?", ["lastupdated"]));
+	q1 = await db.sendQuery("SELECT SUM(stock) AS SUM FROM `FM_products`;");
+	q2  = await db.sendQuery("SELECT SUM(cost * stock) AS cost FROM `FM_products`;");
+	q3  = await db.sendQuery("SELECT SUM(cost * markup * stock) AS rev FROM `FM_products`;");
+	console.log(q2);
+	
 	date = new Date(parseInt(q[0].value));
 	var options = {
 	    year: "numeric",
@@ -187,8 +193,8 @@ var fm = async (req, res)=>{
 	res.render("fm", {active: "guest", date: date});
 	//Guests
     }
-    
-    res.render("fm", {active: "fm", date:date});
+
+    res.render("fm", {active: "fm", date:date, stockSum:q1[0].SUM, cost:q2[0].cost, rev:q3[0].rev});
 }
 
 var root = async (req, res)=>{
