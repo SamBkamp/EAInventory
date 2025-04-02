@@ -27,14 +27,14 @@ function updateStock(){
 }
 
 
-function updateProdName(){
+function updateProdCode(){
     var prodSelected = $('#modalList').find(":selected").attr("data-name");
     $("#disabledInput").val(prodSelected);
 }
 
 
 $("#modalList").on("change", function(){
-    updateProdName();
+    updateProdCode();
 });
 
 function getProducts(){
@@ -59,9 +59,9 @@ function getProducts(){
 
 		//for modal dialogue
 		var opt = $("<option data-name='"+data[key].code+"' value='"+data[key].name+"'>"+data[key].name+"</option>");
-		$("#modalList").append(opt);
-	    }
-	    updateProdName();
+		$("#modalList").append(opt);		
+	    }	    	    
+	    updateProdCode();
 	});
 }
 

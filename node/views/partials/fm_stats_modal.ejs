@@ -1,0 +1,41 @@
+<div class="modal fade" id="statsModal" tabindex="-1">
+  <!-- MODAL -->
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Stats</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+	<div class="row text-center">
+	  <div class="col">
+	    Total Products:
+	  </div>
+	  <div class="col">
+	    <%= stockSum %>
+	  </div>
+	</div>
+	<div class="row text-center">
+	  <div class="col">
+	    Total Cost to us:
+	  </div>
+	  <div class="col">
+	    <%= cost %>
+	  </div>
+	</div>
+	<div class="row text-center">
+	  <div class="col">
+	    Total potential revenue:
+	  </div>
+	  <div class="col">
+	    <%= rev %>
+	  </div>
+	</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+	<button type="button" class="btn btn-primary" onclick="updateStock();">Set</button>
+      </div>
+    </div>
+  </div>
+</div>
