@@ -5,4 +5,5 @@ letsencrypt/chall/*
 **~
 .env
 node/node_modules
+node/logs/*
 PAT
