@@ -5,6 +5,7 @@ const path = require("path");
 const os = require("os");
 const cookieParser = require("cookie-parser");
 const fs = require('node:fs/promises');
+const helper = require("./helpers.js");
 //this so I don't have to recalculate hash each time TODO: stop??
 var pw = "Jellyfish9@";
 const pwHash = crypto.createHash("sha256");
@@ -193,8 +194,8 @@ var fm = async (req, res)=>{
 	res.render("fm", {active: "guest", date: date});
 	//Guests
     }
-
-    res.render("fm", {active: "fm", date:date, stockSum:q1[0].SUM, cost:q2[0].cost, rev:q3[0].rev});
+    
+    res.render("fm", {active: "fm", date:date, stockSum:q1[0].SUM, cost:helper.toFinNumber(q2[0].cost), rev:helper.toFinNumber(q3[0].rev)});
 }
 
 var root = async (req, res)=>{
