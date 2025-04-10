@@ -7,7 +7,7 @@ const cookieParser = require("cookie-parser");
 const fs = require('node:fs/promises');
 const helper = require("./helpers.js");
 //this so I don't have to recalculate hash each time TODO: stop??
-var pw = "Jellyfish9@";
+var pw = process.env.NODE_LOGIN_PW;
 const pwHash = crypto.createHash("sha256");
 pwHash.update(pw);
 var hashedPw = pwHash.digest("hex");
