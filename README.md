@@ -32,4 +32,10 @@ all configuration options are read from the `.env` file. There is an example `.e
 
 `NGINX_FILE` - The nginx conf file (usually either nginx.conf or nginx-nossl.conf)
 
+## SSL
 
+if you want to add SSL functionality to the program, run it with the nginx-nossl.conf first, then after that is running, run `docker compose -f certs.yml` to request a cert from letsencrypt. After this, shut down both docker compose instances, change the env to the nginx.conf and re start the docker container.
+
+Note: change the specifics of certs.yml to fit your respective e-mail and domain
+
+you can then run `docker compose -f certs.yml` with the ssl version running to update the certs in the future.
