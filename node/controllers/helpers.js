@@ -8,7 +8,6 @@ var toFinNumber = (number) => { //takes an int number and returns a string that 
     for(var i = 0; i < split[0].length; i++){
 	if(i % 3 == 0 && i != 0) finalNumber = "," + finalNumber;
 	finalNumber = split[0][i] + finalNumber;
-	console.log(split[0][i]);
     }
 
     split[1] += "00"; //guarantee there is at least 2 characters in this section
