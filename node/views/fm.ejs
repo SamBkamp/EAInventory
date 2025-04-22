@@ -9,7 +9,7 @@
     <link href="/styles/dashstyle.css" rel="stylesheet">
   </head>
   <body>
-
+    
     <%- include('partials/sidebar.ejs') %>
     <% if(active != "guest") {%>
     <%- include('partials/fm_modal.ejs') %>
@@ -18,7 +18,7 @@
 
     <div class="container justify-self-center flex-column" id="mainContent">
       <div class="row mt-5" >
-	<div class="col d-lg-flex d-none">
+	<div class="col-12 col-lg">
           <h3>Fauna Marin Products </h3>
 	</div>
 	<div class="col-12 col-lg-3 d-flex justify-content-end">
@@ -26,24 +26,29 @@
 	</div>
 	<% if(active != "guest") {%>
 
+<<<<<<< HEAD
 	<div class="col col-lg-1 d-flex justify-content-center p-0 px-lg-2 px-1">
 	  <button id="updateTime" type="button" class="btn btn-danger w-100 h-100" style="mind-width: 70px;font-size: 0.9rem;" onclick="verifyTime()">Zero out</button>
 	</div>
 	
 	<div class="col col-lg-1 d-flex justify-content-center p-0 px-lg-2 px-1">
 	  <button id="updateTime" type="button" class="btn btn-warning w-100 h-100" style="mind-width: 70px;font-size: 0.9rem;" onclick="verifyTime()">Verify</button>
+=======
+	<div class="col-3 col-lg-1 d-flex justify-content-center p-0 px-lg-2 px-1">
+	  <button id="updateTime" type="button" class="btn btn-secondary w-100 h-100" style="mind-width: 70px;font-size: 0.9rem;" onclick="verifyTime()">Verify</button>
+>>>>>>> c0ae282d41c208b253f14a018dfa78d1178acf0c
 	</div>
 
-	<div class="col col-lg-1 d-flex justify-content-center p-0 px-lg-2 px-1">
+	<div class="col-3 col-lg-1 d-flex justify-content-center p-0 px-lg-2 px-1">
 	  <button id="addBtn" type="button" class="btn btn-secondary w-100 h-100" style="min-width: 50px;" data-bs-toggle="modal" data-bs-target="#statsModal">Stats</button>
 	</div>
 	
-	<div class="col col-lg-1 d-flex justify-content-center p-0 px-lg-2 px-1">
+	<div class="col-3 col-lg-1 d-flex justify-content-center p-0 px-lg-2 px-1">
 	  <button id="addBtn" type="button" class="btn btn-success w-100 h-100" style="min-width: 50px;" data-bs-toggle="modal" data-bs-target="#addProducts">&#43;</button>
 	</div>
 	
 	<% } %>
-	<div class="col col-lg-1 p-0 px-lg-2 px-1">
+	<div class="col-3 col-lg-1 p-0 px-lg-2 px-1">
 	     <button id="oosbtn" type="button" class="btn btn-outline-primary float-end h-100 w-100" style="font-size: 0.9rem;" onclick="removeZero()">In stock</button>
       </div>
       </div>

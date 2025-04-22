@@ -1,5 +1,4 @@
-services:
-
+services:  
     node:
         image: node:alpine3.20
         ports:
@@ -13,7 +12,9 @@ services:
           - ./node/:/home/node/app/:rw
         command: "npm start"
         depends_on:
-          - db
+          db:
+            condition: service_healthy
+            restart: true
         restart: always
 
     nginx:
@@ -38,6 +39,11 @@ services:
           - database:/var/lib/mysql/
         networks:
           - backend
+        healthcheck:
+          test: "mysqladmin -u root -p$$MYSQL_ROOT_PASSWORD ping -h localhost"
+          interval: 3s
+          timeout: 60s
+          retries: 20
     pma:
         image: phpmyadmin
         restart: always
