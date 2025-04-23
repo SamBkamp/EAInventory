@@ -17,5 +17,6 @@ router.post("/p/login", logic.login);
 router.post("/updateStock", logic.updateFmStock);
 router.get("/fm", logic.fm);
 router.post("/update-verified-date", logic.updateVerifiedDate);
+router.post("/delete-order-entry", logic.deleteOrderEntry);
 
 module.exports = router;

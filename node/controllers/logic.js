@@ -35,7 +35,7 @@ var getOrders = async (req,res)=>{
     }
 
     try{
-	var r = await db.sendQuery("SELECT tanks.model, orders.quantity, orders.date, orders.notes FROM tanks INNER JOIN orders ON tanks.id=orders.model ORDER BY orders.date DESC");
+	var r = await db.sendQuery("SELECT orders.id, tanks.model, orders.quantity, orders.date, orders.notes FROM tanks INNER JOIN orders ON tanks.id=orders.model ORDER BY orders.date DESC");
 	res.send(JSON.stringify(r));
 	
     }catch(err){
@@ -90,6 +90,23 @@ var getFmProducts = async (req, res)=>{
 	res.send("SQL ERROR");
 	console.error(err);
     }
+};
+
+var deleteOrderEntry =  async (req, res) => {
+    if(req.cookies.ident == undefined || req.cookies.ident != hashedPw){
+	return 	res.send("auth failure");
+    }
+
+    try{
+	var r = await db.sendQuery(SqlString.format("DELETE FROM ?? WHERE id=?", [req.body.db, req.body.id]));
+	res.setHeader('content-type', 'text/JSON');
+	res.send({"status":"success"});
+
+    }catch(err){
+	res.send("SQL ERROR");
+	console.error(err);
+    }
+    
 };
 
 var addOrder = async (req, res)=>{
@@ -278,3 +295,4 @@ exports.fm = fm;
 exports.getFmProducts = getFmProducts;
 exports.updateFmStock = updateFmStock;
 exports.updateVerifiedDate = updateVerifiedDate;
+exports.deleteOrderEntry = deleteOrderEntry;
