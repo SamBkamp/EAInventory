@@ -53,7 +53,7 @@ var getSend = async (req, res)=>{
     }
 
     try{
-	var r = await db.sendQuery("SELECT tanks.model, sent.quantity, sent.date, sent.notes FROM tanks INNER JOIN sent ON tanks.id=sent.model ORDER BY sent.date DESC");
+	var r = await db.sendQuery("SELECT sent.id, tanks.model, sent.quantity, sent.date, sent.notes FROM tanks INNER JOIN sent ON tanks.id=sent.model ORDER BY sent.date DESC");
 	res.send(JSON.stringify(r));
 	
     }catch(err){
