@@ -13,8 +13,10 @@ $(document).ready(()=>{
 
 function deleteEntry(e){
     var id = $(e).attr("data-id");
+    var model = $(e).parent().parent().children().first().text();
+    var quantity = $(e).parent().parent().children().first().next().text();
 
-    $.post("delete-order-entry", {"id":id, "db":"orders"})
+    $.post("delete-order-entry", {"id":id, "db":"orders", "model":model, "qty": quantity})
 	.done(function(data){
 	    if(data.status == "success")
 		getOrders();

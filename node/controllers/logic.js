@@ -99,6 +99,10 @@ var deleteOrderEntry =  async (req, res) => {
 
     try{
 	var r = await db.sendQuery(SqlString.format("DELETE FROM ?? WHERE id=?", [req.body.db, req.body.id]));
+	var l = SqlString.format("UPDATE `tanks` SET ?? = ??-? WHERE model=?", [req.body.db, req.body.db, req.body.qty, req.body.model]);
+	console.log(l);
+	var q  = await db.sendQuery(l);
+	
 	res.setHeader('content-type', 'text/JSON');
 	res.send({"status":"success"});
 
