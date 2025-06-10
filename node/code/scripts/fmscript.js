@@ -19,6 +19,8 @@ function updateStock(){
     $.post("updateStock", data).done(function(data){
 	if(data.success){
 	    getProducts();
+	    rem = 1;
+	    removeZero();
 	    $("#successAlert").addClass("show");
 	}else{
 	    $("#failAlert").addClass("show");
