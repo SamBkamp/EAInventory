@@ -21,7 +21,8 @@ function updateStock(){
 	    getProducts();
 	    rem = 1;
 	    removeZero();
-	    $("#successAlert").addClass("show");
+	    $("#successAlert").addClass("show")
+	    setTimeout(hideAlert, 1500, "#successAlert");
 	}else{
 	    $("#failAlert").addClass("show");
 	}
