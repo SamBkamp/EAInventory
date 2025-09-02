@@ -268,7 +268,7 @@ var updateVerifiedDate = async(req, res)=>{
     }
     try{
 	var d = new Date().getTime();
-	var q = db.sendQuery(SqlString.format("UPDATE `config` SET value=? WHERE name='lastupdated'", [d]));
+	var q = await db.sendQuery(SqlString.format("UPDATE `config` SET value=? WHERE name='lastupdated'", [d]));
 	console.log(q);
 	return res.send({"success":d});
     }
