@@ -277,7 +277,24 @@ var updateVerifiedDate = async(req, res)=>{
 	return res.send({"error":"date couldn't be updated"});
     }
 };
+
+
+var zeroOutAllFmProducts = async(req, res)=>{
+    if(req.cookies.ident == undefined || req.cookies.ident != hashedPw){
+	return res.send({"error":"auth-error"});
+    }
+
+    try{
+	var q = await db.sendQuery(SqlString.format("UPDATE `FM_products` SET stock=0 WHERE 1"));
+	return res.send({"success":"success"});
+    }
+    catch(err){
+	console.error(err);
+	return res.send({"error":"could not zero out all the products"});
+    }
     
+    
+};
 
 var erm = async (req, res)=>{
     res.send("hello world");
@@ -300,3 +317,4 @@ exports.getFmProducts = getFmProducts;
 exports.updateFmStock = updateFmStock;
 exports.updateVerifiedDate = updateVerifiedDate;
 exports.deleteOrderEntry = deleteOrderEntry;
+exports.zeroOutAllFmProducts = zeroOutAllFmProducts;

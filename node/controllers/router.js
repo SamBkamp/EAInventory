@@ -18,5 +18,6 @@ router.post("/updateStock", logic.updateFmStock);
 router.get("/fm", logic.fm);
 router.post("/update-verified-date", logic.updateVerifiedDate);
 router.post("/delete-order-entry", logic.deleteOrderEntry);
+router.post("/zero-fm-products", logic.zeroOutAllFmProducts);
 
 module.exports = router;

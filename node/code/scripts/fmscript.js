@@ -109,3 +109,11 @@ function verifyTime(){
 	    else $("#dateText").text("Last verified on " + new Intl.DateTimeFormat("en-US", options).format(date));
 	});
 }
+
+function zeroOut(){
+    $.post("/zero-fm-products",{})
+	.done(function(data){
+	    if(data.error) alert(data.error);
+	    else getProducts();
+	});
+}
